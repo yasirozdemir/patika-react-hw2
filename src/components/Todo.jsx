@@ -27,6 +27,12 @@ const Todo = ({
     setTodos(updatedTodos);
   };
 
+  const handleDelete = () => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+    setCompletedCount(updatedTodos.filter((todo) => todo.completed).length);
+  };
+
   return (
     <>
       <li className={isCompleted ? "completed" : "incomplete"}>
@@ -37,6 +43,7 @@ const Todo = ({
           disabled={isCompleted}
           onChange={handleEdit}
         />
+        <button onClick={handleDelete}>delete</button>
       </li>
     </>
   );
