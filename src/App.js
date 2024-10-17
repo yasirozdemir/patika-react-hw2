@@ -5,12 +5,26 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
   const [completedCount, setCompletedCount] = useState(0);
+  const [filter, setFilter] = useState("all");
 
   const addNewTodo = (e) => {
-    setTodos([...todos, { text: newTodo, completed: false, id: todos.length }]);
+    setTodos([...todos, { text: newTodo, completed: false, id: Date.now() }]);
     setNewTodo("");
     e.preventDefault();
   };
+
+  const getFilteredTodos = () => {
+    switch (filter) {
+      case "completed":
+        return todos.filter((todo) => todo.completed);
+      case "incomplete":
+        return todos.filter((todo) => !todo.completed);
+      default:
+        return todos;
+    }
+  };
+
+  const filteredTodos = getFilteredTodos();
 
   return (
     <div className="App">
@@ -29,16 +43,34 @@ function App() {
         }}
       />
       <div>
-        <button>All</button>
-        <button>Completed</button>
-        <button>Incomplete</button>
+        <button
+          onClick={() => {
+            setFilter("all");
+          }}
+        >
+          All
+        </button>
+        <button
+          onClick={() => {
+            setFilter("completed");
+          }}
+        >
+          Completed
+        </button>
+        <button
+          onClick={() => {
+            setFilter("incomplete");
+          }}
+        >
+          Incomplete
+        </button>
       </div>
       <h2>Completed Todos: {completedCount}</h2>
       <ol id="todo-list">
-        {todos.map((todo, i) => {
+        {filteredTodos.map((todo) => {
           return (
             <Todo
-              key={i}
+              key={todo.id}
               todo={todo}
               todos={todos}
               setTodos={setTodos}

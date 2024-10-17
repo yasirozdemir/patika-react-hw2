@@ -10,20 +10,21 @@ const Todo = ({
   const [isCompleted, setIsCompleted] = useState(completed);
 
   const handleCheck = (e) => {
-    setIsCompleted(!isCompleted);
-    if (e.target.checked) {
-      todos[id].completed = true;
-      setTodos(todos);
-    } else {
-      todos[id].completed = false;
-      setTodos(todos);
-    }
-    setCompletedCount(todos.filter((todo) => todo.completed).length);
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: e.target.checked } : todo
+    );
+    setTodos(updatedTodos);
+    setIsCompleted(e.target.checked);
+    setCompletedCount(updatedTodos.filter((todo) => todo.completed).length);
   };
 
   const handleEdit = (e) => {
     const newText = e.target.value;
     setEditedText(newText);
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, text: newText } : todo
+    );
+    setTodos(updatedTodos);
   };
 
   return (
