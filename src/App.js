@@ -30,6 +30,10 @@ function App() {
     }
   };
 
+  const clearCompleted = () => {
+    setTodos(todos.filter((el) => !el.completed));
+  };
+
   useEffect(() => {
     switch (filter) {
       case "completed":
@@ -93,6 +97,7 @@ function App() {
         </button>
       </div>
       <h2>{incompletedCount} todos left</h2>
+      <button onClick={clearCompleted}>Clear completed</button>
       <ol id="todo-list">
         {filteredTodos.map((todo) => {
           return (

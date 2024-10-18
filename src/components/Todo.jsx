@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const Todo = ({ todo: { text, completed, id }, todos, setTodos }) => {
   const [editedText, setEditedText] = useState(text);
+  const [placeholder, setPlaceHolder] = useState("todo");
   const [isCompleted, setIsCompleted] = useState(completed);
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const Todo = ({ todo: { text, completed, id }, todos, setTodos }) => {
 
   const handleEdit = (e) => {
     const newText = e.target.value;
+    newText === "" && setPlaceHolder("(Text)");
     setEditedText(newText);
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, text: newText } : todo
@@ -36,6 +38,7 @@ const Todo = ({ todo: { text, completed, id }, todos, setTodos }) => {
         <input type="checkbox" checked={isCompleted} onChange={handleCheck} />
         <input
           type="text"
+          placeholder={placeholder}
           value={editedText}
           disabled={isCompleted}
           onChange={handleEdit}
