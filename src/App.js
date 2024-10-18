@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Todo from "./components/Todo";
-import initialTodos from "./lib/initialTodos.json";
+import savedTodos from "./lib/savedTodos.json";
 
 function App() {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState(savedTodos);
   const [newTodo, setNewTodo] = useState("");
   const [incompletedCount, setIncompletedCount] = useState(todos.length);
+  const [completedCount, setCompletedCount] = useState(0);
+
   const [filter, setFilter] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState(todos);
 
@@ -45,11 +47,12 @@ function App() {
       default:
         setFilteredTodos(todos);
     }
+    setIncompletedCount(todos.filter((todo) => !todo.completed).length);
   }, [filter, todos]);
 
   useEffect(() => {
-    setIncompletedCount(todos.filter((todo) => !todo.completed).length);
-  }, [filter, todos]);
+    setCompletedCount(todos.length - incompletedCount);
+  }, [todos, incompletedCount]);
 
   return (
     <div className="App">
@@ -97,6 +100,7 @@ function App() {
         </button>
       </div>
       <h2>{incompletedCount} todos left</h2>
+      <h2>completed {completedCount}</h2>
       <button onClick={clearCompleted}>Clear completed</button>
       <ol id="todo-list">
         {filteredTodos.map((todo) => {
