@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Todo = ({ todo: { text, completed, id }, todos, setTodos }) => {
+const TodoItem = ({ todo: { text, completed, id }, todos, setTodos }) => {
   const [editedText, setEditedText] = useState(text);
   const [placeholder, setPlaceHolder] = useState("todo");
   const [isCompleted, setIsCompleted] = useState(completed);
@@ -31,22 +31,25 @@ const Todo = ({ todo: { text, completed, id }, todos, setTodos }) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
   };
-
   return (
-    <>
-      <li className={isCompleted ? "completed" : "incomplete"}>
-        <input type="checkbox" checked={isCompleted} onChange={handleCheck} />
-        <input
-          type="text"
-          placeholder={placeholder}
-          value={editedText}
-          disabled={isCompleted}
-          onChange={handleEdit}
-        />
-        <button onClick={handleDelete}>delete</button>
-      </li>
-    </>
+    <li className={isCompleted ? "completed" : "incomplete"}>
+      <input
+        type="checkbox"
+        name={"check-" + id.toString()}
+        checked={isCompleted}
+        onChange={handleCheck}
+      />
+      <input
+        type="text"
+        name={"text-" + id.toString()}
+        placeholder={placeholder}
+        value={editedText}
+        disabled={isCompleted}
+        onChange={handleEdit}
+      />
+      <button onClick={handleDelete}>delete</button>
+    </li>
   );
 };
 
-export default Todo;
+export default TodoItem;
