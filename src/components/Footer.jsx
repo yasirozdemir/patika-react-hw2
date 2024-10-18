@@ -1,42 +1,51 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 const Footer = ({ todos, setTodos, setFilter, incompletedCount }) => {
-  const [completedCount, setCompletedCount] = useState(0);
+  //   const [completedCount, setCompletedCount] = useState(0);
 
   const clearCompleted = () => {
     setTodos(todos.filter((el) => !el.completed));
   };
 
-  useEffect(() => {
-    setCompletedCount(todos.filter((el) => el.completed).length);
-  }, [todos]);
+  //   useEffect(() => {
+  //     setCompletedCount(todos.filter((el) => el.completed).length);
+  //   }, [todos]);
 
   return (
     <footer>
+      <p>{incompletedCount} todos left</p>
+      {/* <p>completed {completedCount}</p> */}
+      <div>
+        <button
+          autoFocus={true}
+          onClick={() => {
+            setFilter("all");
+          }}
+        >
+          All
+        </button>
+        <button
+          onClick={() => {
+            setFilter("completed");
+          }}
+        >
+          Completed
+        </button>
+        <button
+          onClick={() => {
+            setFilter("incomplete");
+          }}
+        >
+          Incomplete
+        </button>
+      </div>
       <button
-        onClick={() => {
-          setFilter("all");
-        }}
+        onClick={clearCompleted}
+        id="clear-completed"
+        className={todos.some((el) => el.completed) ? "" : "hidden"}
       >
-        All
+        Clear completed
       </button>
-      <button
-        onClick={() => {
-          setFilter("completed");
-        }}
-      >
-        Completed
-      </button>
-      <button
-        onClick={() => {
-          setFilter("incomplete");
-        }}
-      >
-        Incomplete
-      </button>
-      <h2>{incompletedCount} todos left</h2>
-      <h2>completed {completedCount}</h2>
-      <button onClick={clearCompleted}>Clear completed</button>
     </footer>
   );
 };

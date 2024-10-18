@@ -25,7 +25,7 @@ const Main = () => {
     setIncompletedCount(todos.filter((todo) => !todo.completed).length);
   }, [filter, todos]);
   return (
-    <div>
+    <main>
       <Header
         todos={todos}
         setTodos={setTodos}
@@ -50,7 +50,7 @@ const Main = () => {
         setFilter={setFilter}
         incompletedCount={incompletedCount}
       />
-    </div>
+    </main>
   );
 };
 

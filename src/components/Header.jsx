@@ -25,9 +25,9 @@ const Header = ({ todos, setTodos, setFilter, setIncompletedCount }) => {
   };
 
   return (
-    <>
-      <section>
-        <h1>todos</h1>
+    <header>
+      <h1>todos</h1>
+      <div>
         <input
           type="checkbox"
           id="handle-complete"
@@ -37,6 +37,7 @@ const Header = ({ todos, setTodos, setFilter, setIncompletedCount }) => {
         <input
           type="text"
           id="add-todo"
+          placeholder="What needs to be done?"
           value={newTodo}
           onChange={(e) => {
             setNewTodo(e.target.value);
@@ -48,8 +49,8 @@ const Header = ({ todos, setTodos, setFilter, setIncompletedCount }) => {
                 : alert("You should enter text!");
           }}
         />
-      </section>
-    </>
+      </div>
+    </header>
   );
 };
 
