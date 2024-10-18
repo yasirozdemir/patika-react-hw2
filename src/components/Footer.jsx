@@ -1,11 +1,16 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const Footer = ({ todos, setTodos, setFilter, incompletedCount }) => {
+const Footer = ({ todos, setTodos, filter, setFilter, incompletedCount }) => {
   //   const [completedCount, setCompletedCount] = useState(0);
+  const [activeTab, setActiveTab] = useState(filter);
 
   const clearCompleted = () => {
     setTodos(todos.filter((el) => !el.completed));
   };
+
+  useEffect(() => {
+    setActiveTab(filter);
+  }, [filter]);
 
   //   useEffect(() => {
   //     setCompletedCount(todos.filter((el) => el.completed).length);
@@ -17,7 +22,7 @@ const Footer = ({ todos, setTodos, setFilter, incompletedCount }) => {
       {/* <p>completed {completedCount}</p> */}
       <div>
         <button
-          autoFocus={true}
+          className={activeTab === "all" ? "active" : ""}
           onClick={() => {
             setFilter("all");
           }}
@@ -25,6 +30,7 @@ const Footer = ({ todos, setTodos, setFilter, incompletedCount }) => {
           All
         </button>
         <button
+          className={activeTab === "completed" ? "active" : ""}
           onClick={() => {
             setFilter("completed");
           }}
@@ -32,6 +38,7 @@ const Footer = ({ todos, setTodos, setFilter, incompletedCount }) => {
           Completed
         </button>
         <button
+          className={activeTab === "incomplete" ? "active" : ""}
           onClick={() => {
             setFilter("incomplete");
           }}

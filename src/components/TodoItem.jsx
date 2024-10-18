@@ -47,7 +47,7 @@ const TodoItem = ({ todo: { text, completed, id }, todos, setTodos }) => {
         disabled={isCompleted}
         onChange={handleEdit}
       />
-      <button onClick={handleDelete}>delete</button>
+      <button onClick={handleDelete}>X</button>
     </li>
   );
 };

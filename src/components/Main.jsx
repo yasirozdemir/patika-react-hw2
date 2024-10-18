@@ -47,6 +47,7 @@ const Main = () => {
       <Footer
         todos={todos}
         setTodos={setTodos}
+        filter={filter}
         setFilter={setFilter}
         incompletedCount={incompletedCount}
       />
