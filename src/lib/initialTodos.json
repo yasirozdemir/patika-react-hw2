@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "text": "Learn Python",
+    "completed": true
+  },
+  {
+    "id": 2,
+    "text": "Build a portfolio website",
+    "completed": true
+  },
+  {
+    "id": 3,
+    "text": "Contribute to open source",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "text": "Attend a tech meetup",
+    "completed": false
+  },
+  {
+    "id": 5,
+    "text": "Practice coding challenges",
+    "completed": true
+  },
+  {
+    "id": 6,
+    "text": "Read tech blogs",
+    "completed": true
+  },
+  {
+    "id": 7,
+    "text": "Work on a side project",
+    "completed": false
+  },
+  {
+    "id": 8,
+    "text": "Prepare for job interviews",
+    "completed": false
+  },
+  {
+    "id": 9,
+    "text": "Update LinkedIn profile",
+    "completed": true
+  },
+  {
+    "id": 10,
+    "text": "Watch a programming tutorial",
+    "completed": false
+  }
+]

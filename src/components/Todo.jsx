@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Todo = ({
-  todo: { text, completed, id },
-  todos,
-  setTodos,
-  setCompletedCount,
-}) => {
+const Todo = ({ todo: { text, completed, id }, todos, setTodos }) => {
   const [editedText, setEditedText] = useState(text);
   const [isCompleted, setIsCompleted] = useState(completed);
+
+  useEffect(() => {
+    setIsCompleted(completed);
+  }, [completed]);
 
   const handleCheck = (e) => {
     const updatedTodos = todos.map((todo) =>
@@ -15,7 +14,6 @@ const Todo = ({
     );
     setTodos(updatedTodos);
     setIsCompleted(e.target.checked);
-    setCompletedCount(updatedTodos.filter((todo) => todo.completed).length);
   };
 
   const handleEdit = (e) => {
@@ -30,7 +28,6 @@ const Todo = ({
   const handleDelete = () => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
-    setCompletedCount(updatedTodos.filter((todo) => todo.completed).length);
   };
 
   return (
